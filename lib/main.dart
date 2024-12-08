@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutri_note/page/page_beranda.dart';
 
+
 void main() {
   runApp(const MyApp());
 }

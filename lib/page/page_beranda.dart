@@ -1,7 +1,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:nutri_note/page/page_catat_makanan.dart';
 import 'package:nutri_note/widget/ColumnInfoBMI.dart';
+import 'package:nutri_note/widget/background.dart';
 import 'package:nutri_note/widget/big_button.dart';
 import 'package:nutri_note/widget/buttonBMI.dart';
 import 'package:nutri_note/widget/columnInfoAir.dart';
@@ -29,16 +31,7 @@ class _BerandaState extends State<Beranda> {
     return Scaffold(
         body: Stack(
       children: [
-        Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [Color(0xffFF9156), Color(0xffFFCFB6)],
-                  begin: Alignment.topCenter)),
-          child: SizedBox(
-            height: height,
-            width: width,
-          ),
-        ),
+        Background1(height, width),
         SafeArea(
           child: SingleChildScrollView(
               child: Padding(
@@ -128,12 +121,17 @@ class _BerandaState extends State<Beranda> {
                 InkWell(
                   child: buttonBig(width, "Catat Makanan"),
                   onTap: () {
-                    
+                    Navigator.push(
+                    context, 
+                    PageRouteBuilder(
+                      pageBuilder: (BuildContext context, Animation<double> animation1, Animation<double> animation2) {
+                        return const CatatMakananState();
+                      },
+                      transitionDuration: Duration.zero,
+                      reverseTransitionDuration: Duration.zero,
+                    ),
+                  );
                   },
-                ),
-
-                SizedBox(
-                  height: 20,
                 ),
                 TextType.pageSubtitleSemiBold(text: "Catatan Air Minum"),
                 SizedBox(
@@ -191,6 +189,8 @@ class _BerandaState extends State<Beranda> {
       ],
     ));
   }
+
+  
 
   
   

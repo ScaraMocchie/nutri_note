@@ -69,6 +69,10 @@ flutter:
     - asset/icons/material-symbols_home.png
     - asset/icons/mdi_graph-box.png
     - asset/icons/raindrop 1.png
+    - asset/icons/menuBaru.png
+    - asset/icons/add_btn.png
+    - asset/icons/min_btn.png
+    - asset/icons/edit.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -3,6 +3,7 @@ import 'package:nutri_note/widget/text_type.dart';
 
 Container buttonBig(double width, String text) {
     return Container(
+      margin: EdgeInsets.only(bottom: 30),
                   height: 54,
                   width: width,
                   alignment: Alignment.center,

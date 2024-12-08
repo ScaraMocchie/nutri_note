@@ -44,6 +44,19 @@ class TextType {
     );
   }
 
+  static Widget subtitleSemiBoldBlack({
+    required String text,
+  }) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: Colors.black,
+        fontSize: 16,
+        fontWeight: FontWeight.w600, 
+      ),
+    );
+  }
+
   static Widget regular({
     required String text,
   }) {
