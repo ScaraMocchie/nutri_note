@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutri_note/controller/page_position.dart';
 import 'package:nutri_note/page/page_beranda.dart';
-import 'package:nutri_note/page/page_catat_makanan.dart';
+import 'package:nutri_note/page/page_profile.dart';
 
 class NavBar extends StatefulWidget {
   final double width;
@@ -51,16 +51,7 @@ class _NavBarState extends State<NavBar> {
                 child: Image.asset("asset/icons/mdi_graph-box.png", 
                 color: (pagePosition.current=="catatan")?Color(0xffFE7A33):null,),
                 onTap: () {
-                  // Navigator.pushReplacement(
-                  //   context, 
-                  //   PageRouteBuilder(
-                  //     pageBuilder: (BuildContext context, Animation<double> animation1, Animation<double> animation2) {
-                  //       return CatatMakananState();
-                  //     },
-                  //     transitionDuration: Duration.zero,
-                  //     reverseTransitionDuration: Duration.zero,
-                  //   ),
-                  // );
+                  
                   setState(() {
                     pagePosition.current = "catatan";
                   });
@@ -70,6 +61,16 @@ class _NavBarState extends State<NavBar> {
                 child: Image.asset("asset/icons/iconamoon_profile-fill.png",
                 color: (pagePosition.current=="profil")?Color(0xffFE7A33):null,),
                 onTap: () {
+                  Navigator.pushReplacement(
+                    context, 
+                    PageRouteBuilder(
+                      pageBuilder: (BuildContext context, Animation<double> animation1, Animation<double> animation2) {
+                        return Profil();
+                      },
+                      transitionDuration: Duration.zero,
+                      reverseTransitionDuration: Duration.zero,
+                    ),
+                  );
                   setState(() {
                     pagePosition.current = "profil";
                   });

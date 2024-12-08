@@ -72,6 +72,7 @@ flutter:
     - asset/icons/menuBaru.png
     - asset/icons/add_btn.png
     - asset/icons/min_btn.png
+    - asset/icons/profile_woman.png
     - asset/icons/edit.png
   #   - images/a_dot_ham.jpeg
 
