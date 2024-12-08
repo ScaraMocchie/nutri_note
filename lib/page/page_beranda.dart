@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:nutri_note/widget/ColumnInfoBMI.dart';
 import 'package:nutri_note/widget/big_button.dart';
 import 'package:nutri_note/widget/buttonBMI.dart';
+import 'package:nutri_note/widget/columnInfoAir.dart';
 import 'package:nutri_note/widget/conNutHarian.dart';
 import 'package:nutri_note/widget/navbar.dart';
 import 'package:nutri_note/widget/text_type.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class Beranda extends StatefulWidget {
   const Beranda({super.key});
@@ -69,6 +71,7 @@ class _BerandaState extends State<Beranda> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           columnInfoBMI("Berat", "70 kg"),
                           columnInfoBMI("BMI", "27.3"),
@@ -136,6 +139,46 @@ class _BerandaState extends State<Beranda> {
                 SizedBox(
                   height: 10,
                 ),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(child: TextType.regular(text: "Kemarin Anda tidak mencapai target air minum harian. Jangan lupa untuk mencukupi kebutuhan minum anda setiap hari!"),),
+                          InkWell(
+                            child: Image.asset("asset/icons/raindrop 1.png"),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 10,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircularPercentIndicator(
+                            radius: 50,
+                            percent: 1000/2000,
+                            circularStrokeCap: CircularStrokeCap.round,
+                            lineWidth: 12,
+                            progressColor: Color(0xff8AC9FE),
+                            animation: true,
+                            animationDuration: 800,
+                            animateFromLastPercent: true,
+                            backgroundColor: Color(0xffD9D9D9),
+                            center: TextType.bigContent(text: "50%"),
+                            ),
+                            columnInfoAir("Target", "2000 ml"),
+                            columnInfoAir("Saat ini", "1000 ml")
+                                        ],
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 110,)
                 
               ],
             ),

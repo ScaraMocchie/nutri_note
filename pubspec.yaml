@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  percent_indicator: ^4.2.4
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -67,6 +68,7 @@ flutter:
     - asset/icons/iconamoon_profile-fill.png
     - asset/icons/material-symbols_home.png
     - asset/icons/mdi_graph-box.png
+    - asset/icons/raindrop 1.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

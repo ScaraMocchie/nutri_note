@@ -95,6 +95,18 @@ class TextType {
     );
   }
 
+  static Widget bigTextAir({
+    required String text,
+  }){
+    return Text(
+      text,
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+      ),
+    );
+  }
+
 
 
   // Tambahkan tipe teks lain sesuai kebutuhan
