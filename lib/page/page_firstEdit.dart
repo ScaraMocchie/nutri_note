@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:nutri_note/controller/calorie_counter_helper.dart';
+import 'package:nutri_note/controller/carb_counter_helper.dart';
 import 'package:nutri_note/controller/dataUser_controller.dart';
+import 'package:nutri_note/controller/fat_counter_helper.dart';
+import 'package:nutri_note/controller/getDate_controller.dart';
+import 'package:nutri_note/controller/protein_counter_helper.dart';
+import 'package:nutri_note/controller/water_counter_helper.dart';
 import 'package:nutri_note/page/page_beranda.dart';
 import 'package:nutri_note/widget/big_button.dart';
 import 'package:nutri_note/widget/gender.dart';
@@ -8,15 +14,14 @@ import 'package:nutri_note/widget/text_type.dart';
 import 'package:nutri_note/widget/tujuan.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PageEdit extends StatefulWidget {
-  final bool isFirst;
-  const PageEdit({super.key, required this.isFirst});
+class PageFirstEdit extends StatefulWidget {
+  const PageFirstEdit({super.key});
 
   @override
-  State<PageEdit> createState() => _PageEditState();
+  State<PageFirstEdit> createState() => _PageFirstEditState();
 }
 
-class _PageEditState extends State<PageEdit> {
+class _PageFirstEditState extends State<PageFirstEdit> {
   final List<String> tujuanItems = [
     "Menaikkan Berat Badan",
     "Menjaga Berat Badan",
@@ -217,50 +222,62 @@ class _PageEditState extends State<PageEdit> {
                         InkWell(
                           child: buttonBig(width, "Simpan"),
                           onTap: () async{
-                            if (widget.isFirst) {
-                              if(isValid()){
-                                String name = nameController.text;
-                                int age = int.parse(umurController.text);
-                                int berat = int.parse(beratController.text);
-                                int tinggi = int.parse(tinggiController.text);
-                                setState(() {
-                                  DataUser.username = name;
-                                  DataUser.gender = selectedGender;
-                                  DataUser.age = age;
-                                  DataUser.berat = berat;
-                                  DataUser.tinggi = tinggi;
-                                  DataUser.intensitasOl = selectedIntensitas;
-                                  DataUser.tujuan = selectedTujuan;
+                            if(isValid()){
+                              String name = nameController.text;
+                              int age = int.parse(umurController.text);
+                              int berat = int.parse(beratController.text);
+                              int tinggi = int.parse(tinggiController.text);
 
-                                });
+                              int calLimit = countCal(age, berat, tinggi, selectedTujuan!, selectedIntensitas!, selectedGender!);
+                              int carbLimit = carbCounter(selectedGender!, age);
+                              int fatLimit = fatCounter(selectedGender!, age);
+                              int proteinLimit = proteinCounter(selectedGender!, age);
+                              int waterLimit = waterIntakeCounter(selectedGender!, age);
 
-                                SharedPreferences sp = await SharedPreferences.getInstance();
-                                sp.setString('username', name);
-                                sp.setString('gender', selectedGender!);
-                                sp.setInt('age', age);
-                                sp.setInt('berat', berat);
-                                sp.setInt('tinggi', tinggi);
-                                sp.setString('intensitasOl', selectedIntensitas!);
-                                sp.setString('tujuan', selectedTujuan!);
+                              SharedPreferences sp = await SharedPreferences.getInstance();
 
-                                Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                  pageBuilder: (BuildContext context,
-                                      Animation<double> animation1,
-                                      Animation<double> animation2) {
-                                    return const Beranda();
-                                  },
-                                  transitionDuration: Duration.zero,
-                                  reverseTransitionDuration: Duration.zero,
-                                ),
-                              );
+                              // Simpan data ke SharedPreferences
+                              await sp.setString('username', name);
+                              await sp.setString('gender', selectedGender!);
+                              await sp.setInt('age', age);
+                              await sp.setInt('berat', berat);
+                              await sp.setInt('tinggi', tinggi);
+                              await sp.setString('intensitasOl', selectedIntensitas!);
+                              await sp.setString('tujuan', selectedTujuan!);
+                              await sp.setInt('calLimit', calLimit);
+                              await sp.setInt('carbLimit', carbLimit);
+                              await sp.setInt('fatLimit', fatLimit);
+                              await sp.setInt('proteinLimit', proteinLimit);
+                              await sp.setInt('waterLimit', waterLimit);
+
+                              // Reset nilai konsumsi harian saat update profil (opsional)
+                              await sp.setInt('calToday', 0);
+                              await sp.setInt('carbToday', 0);
+                              await sp.setInt('proteinToday', 0);
+                              await sp.setInt('fatToday', 0);
+                              await sp.setInt('waterToday', 0);
+                              await sp.setString('lastLoginDate', getDate());
+
+                              // Update state dan data pengguna
+                              setState(() {
+                                DataUser.updateData();
+                              });
+
+
+
+                                if (mounted) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (BuildContext context, Animation<double> animation1, Animation<double> animation2) {
+                                      return const Beranda();
+                                    },
+                                    transitionDuration: Duration.zero,
+                                    reverseTransitionDuration: Duration.zero,
+                                  ),
+                                );
                               }
-                              
-                            } else {
-                              Navigator.pop(context);
-                            }
-                            ;
+                              }
                           },
                         ),
                       ],

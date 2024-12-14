@@ -1,6 +1,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:nutri_note/controller/bmi.dart';
+import 'package:nutri_note/controller/dataUser_controller.dart';
 import 'package:nutri_note/page/page_catat_makanan.dart';
 import 'package:nutri_note/widget/ColumnInfoBMI.dart';
 import 'package:nutri_note/widget/background.dart';
@@ -26,7 +28,7 @@ class _BerandaState extends State<Beranda> {
     var height = size.height;
     var width = size.width;
 
-    var nama = "Lorem Ipsum";
+    String nama = DataUser.username!;
 
     return Scaffold(
         body: Stack(
@@ -66,8 +68,8 @@ class _BerandaState extends State<Beranda> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          columnInfoBMI("Berat", "70 kg"),
-                          columnInfoBMI("BMI", "27.3"),
+                          columnInfoBMI("Berat", "${DataUser.berat} kg"),
+                          columnInfoBMI("BMI", "${calculateBMI(DataUser.berat!, DataUser.tinggi!)}"),
                           InkWell(
                             child: buttonBMI("Perbarui Berat"),
                             onTap: () {},
@@ -79,7 +81,7 @@ class _BerandaState extends State<Beranda> {
                       ),
                       TextType.regular(
                           text:
-                              "Berdasarkan skor BMI, Anda termasuk overweight.")
+                              "Berdasarkan skor BMI, berat Anda termasuk ${getBMICategory(calculateBMI(DataUser.berat!, DataUser.tinggi!))}.")
                     ],
                   ),
                 ),
@@ -97,10 +99,10 @@ class _BerandaState extends State<Beranda> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      child: conNutHarian("Kalori", 500, 700, width),
+                      child: conNutHarian("Kalori", DataUser.calToday, DataUser.calLimit!, width),
                     ),
                     InkWell(
-                      child: conNutHarian("Karbohidrat",500, 700, width),
+                      child: conNutHarian("Karbohidrat",DataUser.carbToday, DataUser.carbLimit!, width),
                     )
                   ],
                 ),
@@ -109,10 +111,10 @@ class _BerandaState extends State<Beranda> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      child: conNutHarian("Protein", 500, 700, width),
+                      child: conNutHarian("Protein", DataUser.proteinToday, DataUser.proteinLimit!, width),
                     ),
                     InkWell(
-                      child: conNutHarian("Lemak",500, 700, width),
+                      child: conNutHarian("Lemak",DataUser.fatToday, DataUser.fatLimit!, width),
                     ),
                     // Text("ajsajsi")
                   ],
@@ -159,7 +161,7 @@ class _BerandaState extends State<Beranda> {
                         children: [
                           CircularPercentIndicator(
                             radius: 50,
-                            percent: 1000/2000,
+                            percent: DataUser.waterToday/DataUser.waterLimit!,
                             circularStrokeCap: CircularStrokeCap.round,
                             lineWidth: 12,
                             progressColor: Color(0xff8AC9FE),
@@ -169,8 +171,8 @@ class _BerandaState extends State<Beranda> {
                             backgroundColor: Color(0xffD9D9D9),
                             center: TextType.bigContent(text: "50%"),
                             ),
-                            columnInfoAir("Target", "2000 ml"),
-                            columnInfoAir("Saat ini", "1000 ml")
+                            columnInfoAir("Target", "${DataUser.waterLimit} ml"),
+                            columnInfoAir("Saat ini", "${DataUser.waterToday} ml")
                                         ],
                       )
                     ],
