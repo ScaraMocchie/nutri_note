@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   percent_indicator: ^4.2.4
+  sqflite: ^2.3.2
+  path: ^1.8.3
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -73,6 +75,7 @@ flutter:
     - asset/icons/add_btn.png
     - asset/icons/min_btn.png
     - asset/icons/profile_woman.png
+    - asset/icons/man.png
     - asset/icons/edit.png
   #   - images/a_dot_ham.jpeg
 

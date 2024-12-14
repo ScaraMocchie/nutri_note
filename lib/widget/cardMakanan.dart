@@ -1,9 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:nutri_note/widget/colDataMakan.dart';
 import 'package:nutri_note/widget/counterIcon.dart';
+import 'package:nutri_note/widget/showEditMakanan.dart';
 import 'package:nutri_note/widget/text_type.dart';
 
-Container CardMakanan() {
+class CardMakanan extends StatelessWidget {
+  final double width;
+  final int id;
+  final String name;
+  final int amount;
+  final int cal;
+  final int carb;
+  final int protein;
+  final int fat;
+  final VoidCallback? onEdit; 
+  // final VoidCallback? onEdit; // Callback untuk aksi edit
+
+  const CardMakanan({
+    Key? key,
+    required this.onEdit,
+    required this.width,
+    required this.id,
+    required this.name,
+    required this.amount,
+    required this.cal,
+    required this.carb,
+    required this.protein,
+    required this.fat,
+    // this.onEdit,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 10),
       padding: EdgeInsets.all(20),
@@ -20,14 +48,17 @@ Container CardMakanan() {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextType.subtitleSemiBoldBlack(text: "Nasi Goreng"),
+                  SizedBox(
+                    width: width-40-24-45,
+                    child: TextType.subtitleSemiBoldBlack(text: name),
+                  ),
                   Row(
                     children: [
                       Image.asset(
                         "asset/icons/calories.png",
                         width: 12,
                       ),
-                      TextType.regular(text: "250 Kalori / 149 g")
+                      TextType.regular(text: "$amount Kalori / $cal g")
                     ],
                   )
                 ],
@@ -37,6 +68,22 @@ Container CardMakanan() {
                   "asset/icons/edit.png",
                   width: 24,
                 ),
+                onTap: () async {
+                  await showEditDialog(
+                    context,
+                    id: id, // ID makanan
+                    namaMakanan: name,
+                    jumlahMakanan: amount.toString(),
+                    kaloriMakanan: cal.toString(),
+                    karboMakanan: carb.toString(),
+                    proteinMakanan: protein.toString(),
+                    lemakMakanan: fat.toString(),
+                  );
+                  if (onEdit != null) {
+                    onEdit!(); // Memanggil callback untuk menyegarkan daftar
+                  }
+                },
+
               )
             ],
           ),
@@ -46,13 +93,14 @@ Container CardMakanan() {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              colDataMakan('Karbohidrat', '34,81 g'),
-              colDataMakan('Protein', '7,02 g'),
-              colDataMakan('Lemak', '9,1 g'),
-              CounterIcon()
+              colDataMakan('Karbohidrat', '$carb g'),
+              colDataMakan('Protein', '$protein g'),
+              colDataMakan('Lemak', '$fat g'),
+              CounterIcon(cal: amount, carb: carb, protein: protein, fat: fat,)
             ],
           )
         ],
       ),
     );
   }
+}

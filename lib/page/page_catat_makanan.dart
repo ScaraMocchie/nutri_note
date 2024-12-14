@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:nutri_note/controller/database_service.dart';
+import 'package:nutri_note/controller/food_model.dart';
+import 'package:nutri_note/controller/totalAdd_controller.dart';
 import 'package:nutri_note/widget/background.dart';
 import 'package:nutri_note/widget/big_button.dart';
 import 'package:nutri_note/widget/cardMakanan.dart';
+import 'package:nutri_note/widget/showAddDialogue.dart';
 import 'package:nutri_note/widget/text_type.dart';
 
 class CatatMakananState extends StatefulWidget {
@@ -12,6 +16,22 @@ class CatatMakananState extends StatefulWidget {
 }
 
 class _CatatMakananStateState extends State<CatatMakananState> {
+  final DatabaseService _databaseService = DatabaseService.instance;
+  late Future<List<Food>?> _futureFoodList;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureFoodList = _databaseService.getFood();
+  }
+
+  void _refreshFoodList() {
+    setState(() {
+      _futureFoodList = _databaseService.getFood();
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -36,9 +56,14 @@ class _CatatMakananStateState extends State<CatatMakananState> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextType.pageTitle(text: "Catat Makanan"),
-                      Image.asset(
-                        "asset/icons/menuBaru.png",
-                        width: 80,
+                      InkWell(
+                        onTap: () {
+                          showAddDialog(context, _refreshFoodList);
+                        },
+                        child: Image.asset(
+                          "asset/icons/menuBaru.png",
+                          width: 80,
+                        ),
                       )
                     ],
                   ),
@@ -69,8 +94,14 @@ class _CatatMakananStateState extends State<CatatMakananState> {
                   ),
 
                   //list makanan
-                  for (int i = 0; i < 10; i++) CardMakanan(),
-                  SizedBox(height: 100,)
+                  SizedBox(
+                    height: height-54-30-10-24-20-20-120, // atau ukuran sesuai kebutuhan
+                    child: foodList(width),
+                  ),
+
+                  SizedBox(
+                    height: 100,
+                  )
                 ],
               ),
             ),
@@ -78,14 +109,59 @@ class _CatatMakananStateState extends State<CatatMakananState> {
           Align(
             alignment: Alignment.bottomCenter,
             child: InkWell(
-            child: buttonBig(width-40, "Simpan"),
-          ),
+              child: buttonBig(width - 40, "Simpan"),
+              onTap: (){
+                _databaseService.getFood();
+                print(TotalAdd.totalCal);
+                print(TotalAdd.totalCarb);
+                print(TotalAdd.totalProtein);
+                setState(() {
+                  TotalAdd.totalCal = 0;
+                  TotalAdd.totalCarb = 0;
+                  TotalAdd.totalProtein = 0;
+                  TotalAdd.totalFat = 0;
+                });
+                print(DateTime.now());
+                Navigator.pop(context);
+              },
+            ),
           )
         ],
       ),
     );
   }
 
+  Widget foodList(double width) {
+  return FutureBuilder<List<Food>?>(
+    future: _futureFoodList,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        return Center(child: Text("Error: ${snapshot.error}"));
+      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        return Center(child: Text("No food items found"));
+      }
+      return ListView.builder(
+        itemCount: snapshot.data!.length,
+        itemBuilder: (context, index) {
+          final food = snapshot.data![index];
+          return CardMakanan(
+            onEdit: _refreshFoodList,
+            width: width,
+            id: food.id,
+            name: food.name,
+            amount: food.amount,
+            cal: food.cal,
+            carb: food.carb,
+            protein: food.protein,
+            fat: food.fat,
+          );
+        },
+      );
+    },
+  );
+}
 
 
   

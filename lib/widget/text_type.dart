@@ -70,6 +70,19 @@ class TextType {
     );
   }
 
+  static Widget error({
+    required String text,
+  }) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: Color.fromARGB(255, 201, 13, 0),
+        fontSize: 14,
+        fontWeight: FontWeight.w400, // Regular
+      ),
+    );
+  }
+
   static Widget regularUp({
     required String text,
   }) {

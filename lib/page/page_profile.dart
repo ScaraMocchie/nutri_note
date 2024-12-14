@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutri_note/page/page_edit.dart';
 import 'package:nutri_note/widget/big_button.dart';
 import 'package:nutri_note/widget/navbar.dart';
 import 'package:nutri_note/widget/text_type.dart';
@@ -123,7 +124,16 @@ class _ProfilState extends State<Profil> {
                       InkWell(
                   child: buttonBig(width, "Edit Data"),
                   onTap: () {
-                    
+                    Navigator.pushReplacement(
+                    context, 
+                    PageRouteBuilder(
+                      pageBuilder: (BuildContext context, Animation<double> animation1, Animation<double> animation2) {
+                        return PageEdit();
+                      },
+                      transitionDuration: Duration.zero,
+                      reverseTransitionDuration: Duration.zero,
+                    ),
+                  );
                   },
                 ),
                 ],
