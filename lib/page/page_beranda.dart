@@ -12,6 +12,8 @@ import 'package:nutri_note/widget/buttonBMI.dart';
 import 'package:nutri_note/widget/columnInfoAir.dart';
 import 'package:nutri_note/widget/conNutHarian.dart';
 import 'package:nutri_note/widget/navbar.dart';
+import 'package:nutri_note/widget/show_analyst_dialogue.dart';
+import 'package:nutri_note/widget/show_drink_dialogue.dart';
 import 'package:nutri_note/widget/text_type.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -82,7 +84,7 @@ class _BerandaState extends State<Beranda> {
                       ),
                       TextType.regular(
                           text:
-                              "Berdasarkan skor BMI, berat Anda termasuk ${getBMICategory(calculateBMI(DataUser.berat!, DataUser.tinggi!))}.")
+                              "Berdasarkan skor BMI, berat Anda termasuk ${getBMICategory(calculateBMI(DataUser.berat!, DataUser.tinggi!))}. ${DataUser.analisisOl}")
                     ],
                   ),
                 ),
@@ -101,9 +103,15 @@ class _BerandaState extends State<Beranda> {
                   children: [
                     InkWell(
                       child: conNutHarian("Kalori", DataUser.calToday, DataUser.calLimit!, width),
+                      onTap: (){
+                        showAnalisDialoge(context, DataUser.analisisCal!, 'Kalori', width);
+                      },
                     ),
                     InkWell(
                       child: conNutHarian("Karbohidrat",DataUser.carbToday, DataUser.carbLimit!, width),
+                      onTap: (){
+                        showAnalisDialoge(context, DataUser.analisisCarb!, 'Karbohidrat', width);
+                      },
                     )
                   ],
                 ),
@@ -113,9 +121,15 @@ class _BerandaState extends State<Beranda> {
                   children: [
                     InkWell(
                       child: conNutHarian("Protein", DataUser.proteinToday, DataUser.proteinLimit!, width),
+                      onTap: (){
+                        showAnalisDialoge(context, DataUser.analisisProtein!, 'Protein', width);
+                      },
                     ),
                     InkWell(
                       child: conNutHarian("Lemak",DataUser.fatToday, DataUser.fatLimit!, width),
+                      onTap: (){
+                        showAnalisDialoge(context, DataUser.analisisFat!, 'Lemak', width);
+                      },
                     ),
                     // Text("ajsajsi")
                   ],
@@ -128,7 +142,7 @@ class _BerandaState extends State<Beranda> {
                     context, 
                     PageRouteBuilder(
                       pageBuilder: (BuildContext context, Animation<double> animation1, Animation<double> animation2) {
-                        return const CatatMakananState();
+                        return  CatatMakananState();
                       },
                       transitionDuration: Duration.zero,
                       reverseTransitionDuration: Duration.zero,
@@ -154,9 +168,14 @@ class _BerandaState extends State<Beranda> {
                     children: [
                       Row(
                         children: [
-                          Expanded(child: TextType.regular(text: "Kemarin Anda tidak mencapai target air minum harian. Jangan lupa untuk mencukupi kebutuhan minum anda setiap hari!"),),
+                          Expanded(child: TextType.regular(text: "${DataUser.analisisWater}"),),
                           InkWell(
                             child: Image.asset("asset/icons/raindrop 1.png"),
+                            onTap: () {
+                              
+                            showDrinkDialogue(context, width, () {
+                              setState(() {});});
+                            },
                           )
                         ],
                       ),

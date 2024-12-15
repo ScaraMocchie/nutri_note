@@ -7,6 +7,7 @@ void showAddDialog(BuildContext context, VoidCallback onFoodAdded) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
+        backgroundColor: Colors.white,
         content: AddMakanan(
           onFoodAdded: onFoodAdded,
         ),

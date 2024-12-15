@@ -1,5 +1,3 @@
-
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataUser {
@@ -24,6 +22,13 @@ class DataUser {
 
   static int waterToday = 0;
   static int? waterLimit;
+
+  static String? analisisOl;
+  static String? analisisCal;
+  static String? analisisCarb;
+  static String? analisisProtein;
+  static String? analisisFat;
+  static String? analisisWater;
   
   static void updateTakenFoods() async{
     SharedPreferences sp = await SharedPreferences.getInstance();
@@ -60,6 +65,13 @@ class DataUser {
     proteinToday = sp.getInt('proteinToday') ?? 0;
     fatToday = sp.getInt('fatToday') ?? 0;
     waterToday = sp.getInt('waterToday') ?? 0;
+
+    analisisOl = sp.getString('analisisOl') ?? '';
+    analisisCal = sp.getString('analisisCal') ?? 'Data belum tersedia, silahkan login kembali besok untuk melihat analisis singkat.';
+    analisisCarb = sp.getString('analisisCarb') ?? 'Data belum tersedia, silahkan login kembali besok untuk melihat analisis singkat.';
+    analisisProtein = sp.getString('analisisProtein') ?? 'Data belum tersedia, silahkan login kembali besok untuk melihat analisis singkat.';
+    analisisFat = sp.getString('analisisFat') ?? 'Data belum tersedia, silahkan login kembali besok untuk melihat analisis singkat.';
+    analisisWater = sp.getString('analisisWater') ?? 'Data belum tersedia, silahkan login kembali besok untuk melihat analisis singkat.';
 
     // Opsional: tambahkan last login date jika disimpan
     lastLoginDate = sp.getString('lastLoginDate');
