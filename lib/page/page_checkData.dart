@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nutri_note/controller/dataUser_controller.dart';
+import 'package:nutri_note/controller/getDate_controller.dart';
+import 'package:nutri_note/controller/resetDay.dart';
 import 'package:nutri_note/page/page_beranda.dart';
-import 'package:nutri_note/page/page_edit.dart';
 import 'package:nutri_note/page/page_firstEdit.dart';
 import 'package:nutri_note/widget/background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,8 +30,13 @@ class CheckDataPage extends StatelessWidget {
             return Center(child: Text("Error: ${snapshot.error}"));
           } else {
             // Redirect berdasarkan hasil isDataAvailable
-            WidgetsBinding.instance.addPostFrameCallback((_) {
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              SharedPreferences sp = await SharedPreferences.getInstance();
               if (snapshot.data == true) {
+                String _lastlogin = await sp.getString('lastLoginDate')!;
+                if(getDate() != _lastlogin){
+                  resetDay();
+                }
                 DataUser.updateData();
                 Navigator.pushReplacement(
                   context,

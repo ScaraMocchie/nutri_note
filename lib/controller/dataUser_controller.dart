@@ -1,8 +1,8 @@
 
-
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DataUser{
+class DataUser {
   static String? username;
   static String? gender;
   static String? lastLoginDate;
@@ -24,6 +24,15 @@ class DataUser{
 
   static int waterToday = 0;
   static int? waterLimit;
+  
+  static void updateTakenFoods() async{
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    calToday = sp.getInt('calToday')!;
+    carbToday = sp.getInt('carbToday')!;
+    proteinToday = sp.getInt('proteinToday')!;
+    fatToday = sp.getInt('fatToday')!;
+ 
+  }
 
   static void updateData() async {
     SharedPreferences sp = await SharedPreferences.getInstance();

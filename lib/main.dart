@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nutri_note/page/page_beranda.dart';
 import 'package:nutri_note/page/page_checkData.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 void main() {

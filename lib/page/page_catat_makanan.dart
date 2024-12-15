@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nutri_note/controller/addFoods.dart';
+import 'package:nutri_note/controller/dataUser_controller.dart';
 import 'package:nutri_note/controller/database_service.dart';
 import 'package:nutri_note/controller/food_model.dart';
 import 'package:nutri_note/controller/totalAdd_controller.dart';
@@ -112,14 +114,13 @@ class _CatatMakananStateState extends State<CatatMakananState> {
               child: buttonBig(width - 40, "Simpan"),
               onTap: (){
                 _databaseService.getFood();
+                
                 print(TotalAdd.totalCal);
                 print(TotalAdd.totalCarb);
                 print(TotalAdd.totalProtein);
                 setState(() {
-                  TotalAdd.totalCal = 0;
-                  TotalAdd.totalCarb = 0;
-                  TotalAdd.totalProtein = 0;
-                  TotalAdd.totalFat = 0;
+                  addFoods();
+                  DataUser.updateTakenFoods();
                 });
                 print(DateTime.now());
                 Navigator.pop(context);
@@ -162,7 +163,4 @@ class _CatatMakananStateState extends State<CatatMakananState> {
     },
   );
 }
-
-
-  
 }

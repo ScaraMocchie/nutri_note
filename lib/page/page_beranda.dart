@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:nutri_note/controller/addFoods.dart';
 import 'package:nutri_note/controller/bmi.dart';
 import 'package:nutri_note/controller/dataUser_controller.dart';
 import 'package:nutri_note/page/page_catat_makanan.dart';
@@ -132,7 +133,11 @@ class _BerandaState extends State<Beranda> {
                       transitionDuration: Duration.zero,
                       reverseTransitionDuration: Duration.zero,
                     ),
-                  );
+                  ).then((_){
+                    setState(() {
+                      addFoods();
+                    });
+                  });
                   },
                 ),
                 TextType.pageSubtitleSemiBold(text: "Catatan Air Minum"),
