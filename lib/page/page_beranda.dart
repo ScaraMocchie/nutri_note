@@ -104,13 +104,13 @@ class _BerandaState extends State<Beranda> {
                     InkWell(
                       child: conNutHarian("Kalori", DataUser.calToday, DataUser.calLimit!, width),
                       onTap: (){
-                        showAnalisDialoge(context, DataUser.analisisCal!, 'Kalori', width);
+                        showAnalisDialoge(context, DataUser.analisisCal!, 'Kalori', width, DataUser.analisisCal!);
                       },
                     ),
                     InkWell(
                       child: conNutHarian("Karbohidrat",DataUser.carbToday, DataUser.carbLimit!, width),
                       onTap: (){
-                        showAnalisDialoge(context, DataUser.analisisCarb!, 'Karbohidrat', width);
+                        showAnalisDialoge(context, DataUser.analisisCarb!, 'Karbohidrat', width, DataUser.analisisCarb!);
                       },
                     )
                   ],
@@ -122,13 +122,13 @@ class _BerandaState extends State<Beranda> {
                     InkWell(
                       child: conNutHarian("Protein", DataUser.proteinToday, DataUser.proteinLimit!, width),
                       onTap: (){
-                        showAnalisDialoge(context, DataUser.analisisProtein!, 'Protein', width);
+                        showAnalisDialoge(context, DataUser.analisisProtein!, 'Protein', width, DataUser.analisisProtein!);
                       },
                     ),
                     InkWell(
                       child: conNutHarian("Lemak",DataUser.fatToday, DataUser.fatLimit!, width),
                       onTap: (){
-                        showAnalisDialoge(context, DataUser.analisisFat!, 'Lemak', width);
+                        showAnalisDialoge(context, DataUser.analisisFat!, 'Lemak', width, DataUser.analisisFat!);
                       },
                     ),
                     // Text("ajsajsi")

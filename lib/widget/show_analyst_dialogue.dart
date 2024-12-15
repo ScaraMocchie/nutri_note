@@ -3,7 +3,7 @@ import 'package:nutri_note/controller/dataUser_controller.dart';
 import 'package:nutri_note/widget/big_button.dart';
 import 'package:nutri_note/widget/text_type.dart';
 
-void showAnalisDialoge(BuildContext context, String data, String title, double width) {
+void showAnalisDialoge(BuildContext context, String data, String title, double width, String analyst) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -12,7 +12,7 @@ void showAnalisDialoge(BuildContext context, String data, String title, double w
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextType.regularUp(text: "${DataUser.analisisCal}"),
+            TextType.regularUp(text: "${analyst}"),
             SizedBox(height: 20,),
             InkWell(
               child: buttonBig(width, 'Tutup'),

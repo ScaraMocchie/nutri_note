@@ -28,10 +28,10 @@ class MyBarGraph2 extends StatelessWidget {
 
 
   
-  final List<double> listdouble = [80.0, 10.0, 14.0, 15.0, 13.0, 10.0, 16.0];
+  // final List<double> listdouble = [80.0, 10.0, 14.0, 15.0, 13.0, 10.0, 16.0];
   @override
   Widget build(BuildContext context) {
-    List<double> listdouble = list;
+    List<double> listdouble = sevenListGeneratorDouble(list);
 
     
 

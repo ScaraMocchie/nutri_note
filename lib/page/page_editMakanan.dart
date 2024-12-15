@@ -74,8 +74,8 @@ class _EditMakananState extends State<EditMakanan> {
       _databaseService.updateFood(
         widget.id,
         namaMakananController.text,
-        int.parse(kaloriMakananController.text),
         int.parse(jumlahMakananController.text),
+        int.parse(kaloriMakananController.text),
         int.parse(karboMakananController.text),
         int.parse(proteinMakananController.text),
         int.parse(lemakMakananController.text),
@@ -120,9 +120,9 @@ class _EditMakananState extends State<EditMakanan> {
         children: [
           buildTextField('Nama Makanan', namaMakananController, TextInputType.text),
           SizedBox(height: 10),
-          buildTextField('Jumlah (g)', jumlahMakananController, TextInputType.number),
+          buildTextField('Jumlah (g)', kaloriMakananController, TextInputType.number),
           SizedBox(height: 10),
-          buildTextField('Kalori', kaloriMakananController, TextInputType.number),
+          buildTextField('Kalori', jumlahMakananController, TextInputType.number),
           SizedBox(height: 10),
           buildTextField('Karbohidrat', karboMakananController, TextInputType.number),
           SizedBox(height: 10),

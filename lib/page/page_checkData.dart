@@ -32,12 +32,15 @@ class CheckDataPage extends StatelessWidget {
             // Redirect berdasarkan hasil isDataAvailable
             WidgetsBinding.instance.addPostFrameCallback((_) async {
               SharedPreferences sp = await SharedPreferences.getInstance();
+              DataUser.updateData();
               if (snapshot.data == true) {
                 String _lastlogin = await sp.getString('lastLoginDate')!;
+                
                 if(getDate() != _lastlogin){
-                  resetDay();
+                  await resetDay();
+                  DataUser.updateData();
                 }
-                DataUser.updateData();
+                
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => Beranda()),
