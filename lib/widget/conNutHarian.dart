@@ -13,7 +13,7 @@ conNutHarian(String judul, int taken, int needed, var width) {
             children: [
               TextType.regularUp(text: judul.toString()),
               SizedBox(height: 5,),
-              TextType.bigContent(text: "${(100*taken/needed).toInt()}%"),
+              TextType.bigContent(text: "${((100*taken/needed).toInt()>100)?100:(100*taken/needed).toInt()}%"),
               SizedBox(height: 15,),
               TextType.regular(text: "${taken}/${needed}"),
               

@@ -174,7 +174,7 @@ class _BerandaState extends State<Beranda> {
                             animationDuration: 800,
                             animateFromLastPercent: true,
                             backgroundColor: Color(0xffD9D9D9),
-                            center: TextType.bigContent(text: "50%"),
+                            center: TextType.bigContent(text: "${((100*DataUser.waterToday/DataUser.waterLimit!).toInt()>100)?100:(100*DataUser.waterToday/DataUser.waterLimit!).toInt()}%"),
                             ),
                             columnInfoAir("Target", "${DataUser.waterLimit} ml"),
                             columnInfoAir("Saat ini", "${DataUser.waterToday} ml")

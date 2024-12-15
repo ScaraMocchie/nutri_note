@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutri_note/controller/dataUser_controller.dart';
 import 'package:nutri_note/page/page_edit.dart';
 import 'package:nutri_note/widget/big_button.dart';
 import 'package:nutri_note/widget/navbar.dart';
@@ -18,8 +19,8 @@ class _ProfilState extends State<Profil> {
     var height = size.height;
     var width = size.width;
 
-    var nama = "Lorem Ipsum";
-    var umur = "25 Tahun";
+    String nama = DataUser.username!;
+    int umur = DataUser.age!;
 
     return Scaffold(
       body: Stack(
@@ -57,7 +58,7 @@ class _ProfilState extends State<Profil> {
                     children: [
                       Padding(padding: EdgeInsets.only(top: 13),
                   child: TextType.buttonText(text: nama)),
-                  TextType.pageSubtitle(text: umur)
+                  TextType.pageSubtitle(text: '$umur tahun')
                     ],)
                   ],),
                   SizedBox(height: 30),
@@ -80,7 +81,7 @@ class _ProfilState extends State<Profil> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: TextType.regularUp(text: "70 Kg"),
+                  child: TextType.regularUp(text: "${DataUser.berat} Kg"),
                       ),
                       SizedBox(width: 10),
                       Container(
@@ -91,11 +92,11 @@ class _ProfilState extends State<Profil> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: TextType.regularUp(text: "165 Cm"),
+                  child: TextType.regularUp(text: "${DataUser.tinggi} Cm"),
                       ),
                     ],),
                     SizedBox(height: 20),
-                    TextType.pageSubtitleSemiBold(text: "Tujuan"),
+                    TextType.pageSubtitleSemiBold(text: "${DataUser.tujuan}"),
                     SizedBox(height:5),
                     Container(
                         width: 361,
@@ -105,7 +106,7 @@ class _ProfilState extends State<Profil> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: TextType.regularUp(text: "Menurunkan Berat Badan"),
+                  child: TextType.regularUp(text: "${DataUser.tujuan}"),
                       ),
                       SizedBox(height: 20),
                     TextType.pageSubtitleSemiBold(text: "Intensitas Olahraga"),
@@ -118,7 +119,7 @@ class _ProfilState extends State<Profil> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: TextType.regularUp(text: "Rendah (tidak sama sekali atau sedikit)"),
+                  child: TextType.regularUp(text: "${DataUser.intensitasOl}"),
                       ),
                       SizedBox(height: 130),
                       InkWell(
@@ -128,12 +129,16 @@ class _ProfilState extends State<Profil> {
                     context, 
                     PageRouteBuilder(
                       pageBuilder: (BuildContext context, Animation<double> animation1, Animation<double> animation2) {
-                        return const PageEdit(isFirst: false,);
+                        return const PageEdit();
                       },
                       transitionDuration: Duration.zero,
                       reverseTransitionDuration: Duration.zero,
                     ),
-                  );
+                  ).then((_){
+                    setState(() {
+                      
+                    });
+                  });
                   },
                 ),
                 ],
