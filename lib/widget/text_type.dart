@@ -97,6 +97,7 @@ class TextType {
   }
 
   static Widget bigContent({
+    textAlign = TextAlign.center,
     required String text,
   }){
     return Text(
@@ -105,6 +106,7 @@ class TextType {
         fontSize: 24,
         fontWeight: FontWeight.w600, 
       ),
+      textAlign: textAlign,
     );
   }
 
