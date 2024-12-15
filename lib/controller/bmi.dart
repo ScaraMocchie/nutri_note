@@ -1,4 +1,4 @@
-double calculateBMI(int beratBadan, int tinggiBadan) {
+double calculateBMI(double beratBadan, int tinggiBadan) {
   // Konversi tinggi badan ke meter
   double tinggiMeter = tinggiBadan / 100;
   

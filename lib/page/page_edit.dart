@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:nutri_note/controller/calorie_counter_helper.dart';
 import 'package:nutri_note/controller/carb_counter_helper.dart';
@@ -72,13 +74,13 @@ class _PageEditState extends State<PageEdit> {
     setState(() {
       DataUser.username = _namaController.text;
       DataUser.age = int.tryParse(_umurController.text);
-      DataUser.berat = int.tryParse(_beratController.text);
+      DataUser.berat = double.tryParse(_beratController.text);
       DataUser.tinggi = int.tryParse(_tinggiController.text);
       DataUser.gender = selectedGender;
       DataUser.tujuan = selectedTujuan;
       DataUser.intensitasOl = selectedIntensitas;
 
-      int calLimit = countCal(int.tryParse(_umurController.text)!, int.tryParse(_beratController.text)!, int.tryParse(_tinggiController.text)!, selectedTujuan!, selectedIntensitas!, selectedGender!);
+      int calLimit = countCal(int.tryParse(_umurController.text)!, double.tryParse(_beratController.text)!, int.tryParse(_tinggiController.text)!, selectedTujuan!, selectedIntensitas!, selectedGender!);
       int carbLimit = carbCounter(selectedGender!, DataUser.age!);
       int fatLimit = fatCounter(selectedGender!, DataUser.age!);
       int proteinLimit = proteinCounter(selectedGender!, DataUser.age!);
@@ -86,7 +88,7 @@ class _PageEditState extends State<PageEdit> {
 
       sp.setString('username', DataUser.username ?? '');
       sp.setInt('age', DataUser.age ?? 0);
-      sp.setInt('berat', DataUser.berat ?? 0);
+      sp.setDouble('berat', DataUser.berat ?? 0);
       sp.setInt('tinggi', DataUser.tinggi ?? 0);
       sp.setString('gender', DataUser.gender ?? '');
       sp.setString('tujuan', DataUser.tujuan ?? '');
@@ -233,7 +235,7 @@ class _PageEditState extends State<PageEdit> {
                                 if (value == null || value.isEmpty) {
                                   return "Berat badan tidak boleh kosong";
                                 }
-                                if (int.tryParse(value) == null) {
+                                if (double.tryParse(value) == null) {
                                   return "Berat badan harus berupa angka";
                                 }
                                 return null;
@@ -290,8 +292,13 @@ class _PageEditState extends State<PageEdit> {
                       SizedBox(height: 30),
                       InkWell(
                         child: buttonBig(width, "Simpan"),
-                        onTap: () {
+                        onTap: () async{
                           if (_formKey.currentState!.validate()) {
+                            if(double.tryParse(_beratController.text)!=DataUser.berat){
+                              DataUser.listBerat.add((double.tryParse(_beratController.text)!));
+                              final sp = await SharedPreferences.getInstance();
+                              sp.setString('listBerat', jsonEncode(DataUser.listBerat));
+                            }
                             _saveUserData();
                             Navigator.pop(context);
                           }

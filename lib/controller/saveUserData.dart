@@ -4,7 +4,7 @@ Future<void> saveUserData({
   required String username,
   required String gender,
   required int age,
-  required int berat,
+  required double berat,
   required int tinggi,
   required String intensitasOl,
   required String tujuan,
@@ -13,7 +13,7 @@ Future<void> saveUserData({
   sp.setString('username', username);
   sp.setString('gender', gender);
   sp.setInt('age', age);
-  sp.setInt('berat', berat);
+  sp.setDouble('berat', berat);
   sp.setInt('tinggi', tinggi);
   sp.setString('intensitasOl', intensitasOl);
   sp.setString('tujuan', tujuan);

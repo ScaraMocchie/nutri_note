@@ -1,4 +1,4 @@
-int countCal(int umur, int berat, int tinggi, String tujuan, String intensitas, String gender){
+int countCal(int umur, double berat, int tinggi, String tujuan, String intensitas, String gender){
   List<String> intensitasItems = [
     "Tidak Pernah",
     "Jarang (1-3 hari dalam seminggu)",

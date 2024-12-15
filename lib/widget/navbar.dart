@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutri_note/controller/page_position.dart';
 import 'package:nutri_note/page/page_beranda.dart';
+import 'package:nutri_note/page/page_charts.dart';
 import 'package:nutri_note/page/page_profile.dart';
 
 class NavBar extends StatefulWidget {
@@ -51,7 +52,17 @@ class _NavBarState extends State<NavBar> {
                 child: Image.asset("asset/icons/mdi_graph-box.png", 
                 color: (pagePosition.current=="catatan")?Color(0xffFE7A33):null,),
                 onTap: () {
-                  
+                  (pagePosition.current != "catatan")
+                  ?Navigator.pushReplacement(
+                    context, 
+                    PageRouteBuilder(
+                      pageBuilder: (BuildContext context, Animation<double> animation1, Animation<double> animation2) {
+                        return ChartsPage();
+                      },
+                      transitionDuration: Duration.zero,
+                      reverseTransitionDuration: Duration.zero,
+                    ),
+                  ):null;
                   setState(() {
                     pagePosition.current = "catatan";
                   });

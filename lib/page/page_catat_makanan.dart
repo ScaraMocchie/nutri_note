@@ -132,11 +132,7 @@ class _CatatMakananStateState extends State<CatatMakananState> {
                 print(TotalAdd.totalCal);
                 print(TotalAdd.totalCarb);
                 print(TotalAdd.totalProtein);
-                setState(() {
-                  addFoods();
-                  DataUser.updateTakenFoods();
-                });
-                print(DateTime.now());
+                
                 Navigator.pop(context);
               },
             ),

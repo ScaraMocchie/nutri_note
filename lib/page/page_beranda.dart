@@ -138,6 +138,7 @@ class _BerandaState extends State<Beranda> {
                 InkWell(
                   child: buttonBig(width, "Catat Makanan"),
                   onTap: () {
+                    print(DataUser.listBerat);
                     Navigator.push(
                     context, 
                     PageRouteBuilder(
@@ -150,6 +151,7 @@ class _BerandaState extends State<Beranda> {
                   ).then((_){
                     setState(() {
                       addFoods();
+                      DataUser.updateTakenFoods();
                     });
                   });
                   },

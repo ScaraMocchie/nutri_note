@@ -11,10 +11,10 @@ void addFoods() async{
 
   SharedPreferences sp = await SharedPreferences.getInstance();
 
-  await sp.setInt('calToday', newCalToday);
-  await sp.setInt('carbToday', newCarbToday);
-  await sp.setInt('proteinToday', newProteinToday);
-  await sp.setInt('fatToday', newFatToday);
+  sp.setInt('calToday', newCalToday);
+  sp.setInt('carbToday', newCarbToday);
+  sp.setInt('proteinToday', newProteinToday);
+  sp.setInt('fatToday', newFatToday);
 
   TotalAdd.totalCal = 0;
   TotalAdd.totalCarb = 0;

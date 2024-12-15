@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:nutri_note/controller/food_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataUser {
@@ -5,7 +8,7 @@ class DataUser {
   static String? gender;
   static String? lastLoginDate;
   static int? age;
-  static int? berat;
+  static double? berat;
   static int? tinggi;
   static String? tujuan;
   static String? intensitasOl;
@@ -22,6 +25,12 @@ class DataUser {
 
   static int waterToday = 0;
   static int? waterLimit;
+
+  static List<double> listBerat = [];
+  static List<int> listCal = [];
+  static List<int> listCarb = [];
+  static List<int> listProtein = [];
+  static List<int> listFat = [];
 
   static String? analisisOl;
   static String? analisisCal;
@@ -46,10 +55,20 @@ class DataUser {
     username = sp.getString('username');
     gender = sp.getString('gender');
     age = sp.getInt('age');
-    berat = sp.getInt('berat');
+    berat = sp.getDouble('berat');
     tinggi = sp.getInt('tinggi');
     tujuan = sp.getString('tujuan');
     intensitasOl = sp.getString('intensitasOl');
+
+    listCal = List<int>.from(jsonDecode(sp.getString('listCal')!));
+    listCarb = List<int>.from(jsonDecode(sp.getString('listCarb')!));
+    listProtein = List<int>.from(jsonDecode(sp.getString('listProtein')!));
+    listFat = List<int>.from(jsonDecode(sp.getString('listFat')!));
+    listBerat = List<double>.from(jsonDecode(sp.getString('listBerat')!));
+
+    sp.setString('listCarb', jsonEncode(listCarb));
+    sp.setString('listProtein', jsonEncode(listProtein));
+    sp.setString('listFat', jsonEncode(listFat));
 
     // Update batas harian
     calLimit = sp.getInt('calLimit');

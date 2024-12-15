@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:nutri_note/controller/calorie_counter_helper.dart';
 import 'package:nutri_note/controller/carb_counter_helper.dart';
@@ -5,6 +8,7 @@ import 'package:nutri_note/controller/dataUser_controller.dart';
 import 'package:nutri_note/controller/fat_counter_helper.dart';
 import 'package:nutri_note/controller/getDate_controller.dart';
 import 'package:nutri_note/controller/protein_counter_helper.dart';
+import 'package:nutri_note/controller/save_nutrients.dart';
 import 'package:nutri_note/controller/water_counter_helper.dart';
 import 'package:nutri_note/page/page_beranda.dart';
 import 'package:nutri_note/widget/big_button.dart';
@@ -53,7 +57,7 @@ class _PageFirstEditState extends State<PageFirstEdit> {
     }
     try {
       int.parse(umurController.text);
-      int.parse(beratController.text);
+      double.parse(beratController.text);
       int.parse(tinggiController.text);
     } catch (e) {
       setState(() {
@@ -225,7 +229,7 @@ class _PageFirstEditState extends State<PageFirstEdit> {
                             if(isValid()){
                               String name = nameController.text;
                               int age = int.parse(umurController.text);
-                              int berat = int.parse(beratController.text);
+                              double berat = double.parse(beratController.text);
                               int tinggi = int.parse(tinggiController.text);
 
                               int calLimit = countCal(age, berat, tinggi, selectedTujuan!, selectedIntensitas!, selectedGender!);
@@ -236,27 +240,31 @@ class _PageFirstEditState extends State<PageFirstEdit> {
 
                               SharedPreferences sp = await SharedPreferences.getInstance();
 
-                              // Simpan data ke SharedPreferences
-                              await sp.setString('username', name);
-                              await sp.setString('gender', selectedGender!);
-                              await sp.setInt('age', age);
-                              await sp.setInt('berat', berat);
-                              await sp.setInt('tinggi', tinggi);
-                              await sp.setString('intensitasOl', selectedIntensitas!);
-                              await sp.setString('tujuan', selectedTujuan!);
-                              await sp.setInt('calLimit', calLimit);
-                              await sp.setInt('carbLimit', carbLimit);
-                              await sp.setInt('fatLimit', fatLimit);
-                              await sp.setInt('proteinLimit', proteinLimit);
-                              await sp.setInt('waterLimit', waterLimit);
+                              sp.setString('username', name);
+                              sp.setString('gender', selectedGender!);
+                              sp.setInt('age', age);
+                              sp.setDouble('berat', berat);
+                              sp.setInt('tinggi', tinggi);
+                              sp.setString('intensitasOl', selectedIntensitas!);
+                              sp.setString('tujuan', selectedTujuan!);
+                              sp.setInt('calLimit', calLimit);
+                              sp.setInt('carbLimit', carbLimit);
+                              sp.setInt('fatLimit', fatLimit);
+                              sp.setInt('proteinLimit', proteinLimit);
+                              sp.setInt('waterLimit', waterLimit);
+
+                              saveNutrients([], [], [], []);
+                              DataUser.listBerat.add(berat);
+                              sp.setString('listBerat', jsonEncode(DataUser.listBerat));
 
                               // Reset nilai konsumsi harian saat update profil (opsional)
-                              await sp.setInt('calToday', 0);
-                              await sp.setInt('carbToday', 0);
-                              await sp.setInt('proteinToday', 0);
-                              await sp.setInt('fatToday', 0);
-                              await sp.setInt('waterToday', 0);
-                              await sp.setString('lastLoginDate', getDate());
+                              sp.setInt('calToday', 0);
+                              sp.setInt('carbToday', 0);
+                              sp.setInt('proteinToday', 0);
+                              sp.setInt('fatToday', 0);
+                              sp.setInt('waterToday', 0);
+                              sp.setString('lastLoginDate', getDate());
+
 
                               // Update state dan data pengguna
                               setState(() {
