@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutri_note/widget/text_type.dart';
 conNutHarian(String judul, int taken, int needed, var width) {
+    var percentage = taken/needed;
     return Container(
       width: (width - 50) / 2,
       decoration: BoxDecoration(
@@ -12,10 +13,27 @@ conNutHarian(String judul, int taken, int needed, var width) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextType.regularUp(text: judul.toString()),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  // yellow : 0xffffc107
+                  // green : 0xff009e60
+                  // red : 0xffbd2024
+                  color: (percentage<0.9)?const Color(0xffffc107):(percentage<1.1)?const Color(0xff009e60):(percentage<1.5)?const Color(0xffffc107):const Color(0xffbd2024)
+                ),
+                child: Text(
+                  (percentage<0.9)?'Rendah':(percentage<1.1)?'Normal':(percentage<1.5)?'Agak Tinggi':'Tinggi',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white
+                  ),
+                ),
+              ),
               SizedBox(height: 5,),
               TextType.bigContent(text: "${((100*taken/needed).toInt()>100)?100:(100*taken/needed).toInt()}%"),
               SizedBox(height: 15,),
-              TextType.regular(text: "${taken}/${needed}"),
+              TextType.regular(text: "${taken}/${needed} ${(judul=='Kalori')? 'kcal':'g'}"),
               
               Stack(
                 children: [

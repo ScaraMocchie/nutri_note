@@ -13,6 +13,7 @@ import 'package:nutri_note/widget/columnInfoAir.dart';
 import 'package:nutri_note/widget/conNutHarian.dart';
 import 'package:nutri_note/widget/navbar.dart';
 import 'package:nutri_note/widget/show_analyst_dialogue.dart';
+import 'package:nutri_note/widget/show_berat_dialogue.dart';
 import 'package:nutri_note/widget/show_drink_dialogue.dart';
 import 'package:nutri_note/widget/text_type.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -75,7 +76,10 @@ class _BerandaState extends State<Beranda> {
                           columnInfoBMI("BMI", "${calculateBMI(DataUser.berat!, DataUser.tinggi!)}"),
                           InkWell(
                             child: buttonBMI("Perbarui Berat"),
-                            onTap: () {},
+                            onTap: () {
+                              showBeratDialogue(context, width, () {
+                              setState(() {});});
+                            },
                           )
                         ],
                       ),

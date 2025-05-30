@@ -60,11 +60,11 @@ class DataUser {
     tujuan = sp.getString('tujuan');
     intensitasOl = sp.getString('intensitasOl');
 
-    listCal = List<int>.from(jsonDecode(sp.getString('listCal')!));
-    listCarb = List<int>.from(jsonDecode(sp.getString('listCarb')!));
-    listProtein = List<int>.from(jsonDecode(sp.getString('listProtein')!));
-    listFat = List<int>.from(jsonDecode(sp.getString('listFat')!));
-    listBerat = List<double>.from(jsonDecode(sp.getString('listBerat')!));
+    listCal = (sp.getString('listCal')!=null)?List<int>.from(jsonDecode(sp.getString('listCal')!)):[];
+    listCarb = (sp.getString('listCarb')!=null)?List<int>.from(jsonDecode(sp.getString('listCarb')!)):[];
+    listProtein = (sp.getString('listProtein')!=null)?List<int>.from(jsonDecode(sp.getString('listProtein')!)):[];
+    listFat = (sp.getString('listFat')!=null)?List<int>.from(jsonDecode(sp.getString('listFat')!)):[];
+    listBerat = (sp.getString('listBerat')!=null)?List<double>.from(jsonDecode(sp.getString('listBerat')!)):[];
 
     sp.setString('listCarb', jsonEncode(listCarb));
     sp.setString('listProtein', jsonEncode(listProtein));

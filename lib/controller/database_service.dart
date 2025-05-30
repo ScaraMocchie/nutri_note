@@ -1,4 +1,5 @@
 import 'package:nutri_note/controller/food_model.dart';
+import 'package:nutri_note/controller/list_makanan.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -17,20 +18,17 @@ class DatabaseService {
   DatabaseService._constructor();
 
   Future<void> insertDefaultFoods(Database db) async {
-    final List<String> defaultFoods = [
-      "Nasgor, 100, 10, 10, 10",
-      "Pecel, 200, 20, 20, 20"
-    ];
+
 
     for (String food in defaultFoods) {
       final List<String> values = food.split(", ");
       await db.insert(_foodsTableName, {
         _foodsNameColumnName: values[0],
-        _foodsAmountColumnName: int.parse(values[1]),
-        _foodsCalColumnName: int.parse(values[2]),
-        _foodsCarbColumnName: int.parse(values[3]),
-        _foodsProteinColumnName: int.parse(values[4]),
-        _foodsFatColumnName: int.parse(values[5]),
+        _foodsAmountColumnName: double.parse(values[2]).toInt(),
+        _foodsCalColumnName: double.parse(values[1]).toInt(),
+        _foodsCarbColumnName: double.parse(values[3]).toInt(),
+        _foodsProteinColumnName: double.parse(values[4]).toInt(),
+        _foodsFatColumnName: double.parse(values[5]).toInt(),
       });
     }
   }
@@ -45,7 +43,7 @@ class DatabaseService {
     final databaseDirPath = await getDatabasesPath();
     final databasePath = join(databaseDirPath, "master_db.db");
     final database =
-        await openDatabase(databasePath, version: 1, onCreate: (db, version) {
+        await openDatabase(databasePath, version: 1, onCreate: (db, version) async{
       db.execute('''
           CREATE TABLE $_foodsTableName(
             $_foodsIdColumnName INTEGER PRIMARY KEY,
@@ -57,7 +55,9 @@ class DatabaseService {
             $_foodsFatColumnName INTEGER NOT NULL
           )
           ''');
+          await insertDefaultFoods(db);
     });
+    
     return database;
   }
 

@@ -16,8 +16,8 @@ class _AddMakananState extends State<AddMakanan> {
   final DatabaseService _databaseService = DatabaseService.instance;
   // Variabel untuk menyimpan input pengguna
   String? addNamaMakanan;
-  String? addKaloriMakanan;
   String? addJumlahMakanan;
+  String? addKaloriMakanan;
   String? addKarboMakanan;
   String? addProteinMakanan;
   String? addLemakMakanan;
@@ -37,7 +37,7 @@ class _AddMakananState extends State<AddMakanan> {
 
       // Memastikan nama makanan tidak kosong
       if (addNamaMakanan != null && addNamaMakanan!.isNotEmpty) {
-        _databaseService.addFoods(addNamaMakanan!, int.parse(addJumlahMakanan!), int.parse(addKaloriMakanan!), int.parse(addKarboMakanan!), int.parse(addProteinMakanan!), int.parse(addLemakMakanan!));
+        _databaseService.addFoods(addNamaMakanan!, int.parse(addKaloriMakanan!), int.parse(addJumlahMakanan!), int.parse(addKarboMakanan!), int.parse(addProteinMakanan!), int.parse(addLemakMakanan!));
 
         setState(() {
           addNamaMakanan = null;
@@ -98,25 +98,25 @@ class _AddMakananState extends State<AddMakanan> {
             });
           }, TextInputType.number),
           SizedBox(height: 10),
-          buildTextField('Kalori', addKaloriMakanan, (value) {
+          buildTextField('Kalori (kcal)', addKaloriMakanan, (value) {
             setState(() {
               addKaloriMakanan = value;
             });
           }, TextInputType.number),
           SizedBox(height: 10),
-          buildTextField('Karbohidrat', addKarboMakanan, (value) {
+          buildTextField('Karbohidrat (g)', addKarboMakanan, (value) {
             setState(() {
               addKarboMakanan = value;
             });
           }, TextInputType.number),
           SizedBox(height: 10),
-          buildTextField('Protein', addProteinMakanan, (value) {
+          buildTextField('Protein (g)', addProteinMakanan, (value) {
             setState(() {
               addProteinMakanan = value;
             });
           }, TextInputType.number),
           SizedBox(height: 10),
-          buildTextField('Lemak', addLemakMakanan, (value) {
+          buildTextField('Lemak (g)', addLemakMakanan, (value) {
             setState(() {
               addLemakMakanan = value;
             });

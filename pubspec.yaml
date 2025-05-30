@@ -44,6 +44,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.3
+
+flutter_icons:
+  image_path: "asset/app_icon.png" 
+  android: true
+  ios: true
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -79,6 +85,16 @@ flutter:
     - asset/icons/profile_woman.png
     - asset/icons/man.png
     - asset/icons/edit.png
+    - asset/app_icon.png
+    - asset/images/contoh_isi_data.jpeg
+    - asset/images/contoh_search.jpeg
+    - asset/images/contoh_tambah_makanan.jpeg
+    - asset/images/contoh_hasil_catat.jpeg
+    - asset/images/contoh_edit_menu.jpeg
+    - asset/images/contoh_tambah_menu.jpeg
+    - asset/images/contoh_isi_menu.jpeg
+    - asset/images/contoh_air_minum.jpeg
+    - asset/images/contoh_bmi.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

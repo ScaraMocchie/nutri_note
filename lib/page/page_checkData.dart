@@ -4,6 +4,7 @@ import 'package:nutri_note/controller/getDate_controller.dart';
 import 'package:nutri_note/controller/resetDay.dart';
 import 'package:nutri_note/page/page_beranda.dart';
 import 'package:nutri_note/page/page_firstEdit.dart';
+import 'package:nutri_note/page/page_tutorial.dart';
 import 'package:nutri_note/widget/background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,7 +50,7 @@ class CheckDataPage extends StatelessWidget {
                 
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => PageFirstEdit()),
+                  MaterialPageRoute(builder: (context) => Tutorial()),
                 );
               }
             });

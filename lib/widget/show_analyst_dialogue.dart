@@ -23,7 +23,7 @@ void showAnalisDialoge(BuildContext context, String data, String title, double w
         ),
         title: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [TextType.bigContent(text: "Analisis Singkat $title")],
+          children: [TextType.bigContent(text: "Analisis $title Kemarin")],
         ),
       );
     },

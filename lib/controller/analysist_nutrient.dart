@@ -13,13 +13,13 @@ List<String> analyzeDailyIntake({
   String analyzeNutrient(String nutrientName, int total, int target) {
     double percentage = total / target * 100;
     if (percentage < 90) {
-      return "$nutrientName Anda kurang (${total} dari ${target}). Tambahkan asupan yang sesuai.";
+      return "Kemarin $nutrientName Anda kurang (${total} dari ${target}). Tambahkan asupan yang sesuai.";
     } else if (percentage <= 110) {
-      return "$nutrientName Anda sesuai target (${total} dari ${target}). Pertahankan!";
+      return "Kemarin $nutrientName Anda sesuai target (${total} dari ${target}). Pertahankan!";
     } else if (percentage <= 150) {
-      return "$nutrientName Anda berlebih (${total} dari ${target}). Kurangi asupan untuk menjaga keseimbangan.";
+      return "Kemarin $nutrientName Anda berlebih (${total} dari ${target}). Kurangi asupan untuk menjaga keseimbangan.";
     } else {
-      return "$nutrientName Anda sangat berlebih (${total} dari ${target}). Perhatikan untuk tidak melebihi kebutuhan.";
+      return "Kemarin $nutrientName Anda sangat berlebih (${total} dari ${target}). Perhatikan untuk tidak melebihi kebutuhan.";
     }
   }
 

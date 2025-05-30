@@ -16,15 +16,25 @@ class MyBarGraph2 extends StatelessWidget {
   
 
   double maxYGen(List<double> list){
-    if (list.length == 0){
+    if (list.isEmpty){
       return 1500;
     }
     double hasil = (list.reduce(max)>0)
-    ?list.reduce(max)*120/100
+    ?(list.reduce(max)+1)
     :100;
     return hasil;
   }
 
+  double minYGen(List<double> list){
+    if (list.isEmpty){
+      return 1500;
+    }
+    List<double> listTemp = list; 
+    listTemp.removeWhere((number) => number == 0); 
+    double hasil = listTemp.reduce(min)-1;
+    print(listTemp.reduce(min)-1);
+    return hasil;
+  }
 
 
   
@@ -46,9 +56,9 @@ class MyBarGraph2 extends StatelessWidget {
     myBarData.initializeBarData();
     return BarChart(
       BarChartData(
-      maxY: maxYGen(list).toDouble(),
+      maxY: maxYGen(list),
       // maxY: 100,
-      minY: 0,
+      minY: minYGen(list),
       gridData: FlGridData(show: false),
       borderData: FlBorderData(show: false),
       titlesData: FlTitlesData(
@@ -68,7 +78,7 @@ class MyBarGraph2 extends StatelessWidget {
             backDrawRodData: BackgroundBarChartRodData(
               show: true,
               // toY: maxYGen(list).toDouble(),
-              toY: maxYGen(listdouble).toDouble(),
+              toY: maxYGen(list),
               color: subColor,
             ))
         ])).toList()

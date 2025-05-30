@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutri_note/controller/dataUser_controller.dart';
 import 'package:nutri_note/page/page_edit.dart';
+import 'package:nutri_note/page/page_tutorial.dart';
 import 'package:nutri_note/widget/big_button.dart';
 import 'package:nutri_note/widget/navbar.dart';
 import 'package:nutri_note/widget/text_type.dart';
@@ -122,6 +123,26 @@ class _ProfilState extends State<Profil> {
                   child: TextType.regularUp(text: "${DataUser.intensitasOl}"),
                       ),
                       SizedBox(height: 130),
+                      InkWell(
+                        child: buttonBig(width, "Cara Penggunaan"),
+                        onTap: () {
+                          Navigator.push(
+                          context, 
+                          PageRouteBuilder(
+                            pageBuilder: (BuildContext context, Animation<double> animation1, Animation<double> animation2) {
+                              return const Tutorial();
+                            },
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero,
+                          ),
+                        ).then((_){
+                          setState(() {
+                            
+                          });
+                        });
+                        },
+                      ),
+                      // SizedBox(height: 10),
                       InkWell(
                   child: buttonBig(width, "Edit Data"),
                   onTap: () {
