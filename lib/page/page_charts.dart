@@ -43,7 +43,8 @@ class _ChartsPageState extends State<ChartsPage> {
                 TextType.pageSubtitleSemiBold(text: "Chart Perubahan Berat"),
                 SizedBox(height: 20,),
                 SizedBox(height: 300,
-                child: MyBarGraph2(list: sevenListGeneratorDouble(DataUser.listBerat), mainColor: Color(0xff9156FF), subColor: Color(0xffFFCCC4),))
+                child: MyBarGraph2(list: sevenListGeneratorDouble(DataUser.listBerat), mainColor: Color(0xff9156FF), subColor: Color(0xffFFCCC4),)),
+                SizedBox(height: 150,),
               ],
             ),
           ),)),
